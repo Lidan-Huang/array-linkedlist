@@ -2,87 +2,120 @@
 /** Node: node for a singly linked list. */
 
 class Node {
-  val = null;
-  next = null;
+    val = null;
+    next = null;
 
-  constructor(val) {
-    this.val = val;
-  }
+    constructor(val) {
+        this.val = val;
+    }
 }
 
 /** LinkedList: chained together nodes. */
 
 class LinkedList {
-  head = null;
-  tail = null;
-  length = 0;
+    head = null;
+    tail = null;
+    length = 0;
 
-  constructor(vals = []) {
-    for (let val of vals) this.push(val);
-  }
+    constructor(vals = []) {
+        for (let val of vals) this.push(val);
+    }
 
-  /** push(val): add new value to end of list. */
+    /** push(val): add new value to end of list. */
 
-  push(val) {
-    let newNode = new Node(val);
+    push(val) {
+        let newNode = new Node(val);
 
-    if(this.head === null) this.head = newNode;
-    if(this.tail === null) {   
+        if (this.head === null) this.head = newNode;
+        if (this.tail === null) {
             this.tail = newNode;
         } else {
             this.tail.next = newNode;
             this.tail = newNode;
         }
-    this.length++;
-  }
+        this.length++;
+    }
 
-  /** unshift(val): add new value to start of list. */
+    /** unshift(val): add new value to start of list. */
 
-  unshift(val) {
+    unshift(val) {
+        let newNode = new Node(val);
 
-  }
+        if (this.tail === null) this.tail = newNode;
 
-  /** pop(): return & remove last item. */
+        if (this.head === null) {
+            this.head = newNode;
+        } else {
+            newNode.next = this.head;
+            this.head = newNode;
+        }
 
-  pop() {
+        this.length++;
+    }
 
-  }
+    /** pop(): return & remove last item. */
+    // We need to consider:
+    //  what if there is only one item? 
+    //  What if there is a second to last item?
 
-  /** shift(): return & remove first item. */
+    //  What if the linkedlist is empty?
 
-  shift() {
 
-  }
+    pop() {
+        if (this.length < 1) throw new Error("List is empty");
 
-  /** getAt(idx): get val at idx. */
+        const lstItem = this.tail;
+        if (this.length === 1) {
+            this.head = null;
+            this.tail = null;
+        } else {
+            let current = this.head;
+            while (current.next !== null) {
+                if (current.next === lstItem) {
+                    this.tail = current;
+                    current.next = null;
+                }
+            }
+        }
+        this.length--;
+        return lstItem.val;
+    }
 
-  getAt(idx) {
+    /** shift(): return & remove first item. */
 
-  }
+    shift() {
 
-  /** setAt(idx, val): set val at idx to val */
+    }
 
-  setAt(idx, val) {
+    /** getAt(idx): get val at idx. */
 
-  }
+    getAt(idx) {
 
-  /** insertAt(idx, val): add node w/val before idx. */
+    }
 
-  insertAt(idx, val) {
+    /** setAt(idx, val): set val at idx to val */
 
-  }
+    setAt(idx, val) {
 
-  /** removeAt(idx): return & remove item at idx, */
+    }
 
-  removeAt(idx) {
+    /** insertAt(idx, val): add node w/val before idx. */
 
-  }
+    insertAt(idx, val) {
 
-  /** average(): return an average of all values in the list */
+    }
 
-  average() {
-    
-  }
+    /** removeAt(idx): return & remove item at idx, */
+
+    removeAt(idx) {
+
+    }
+
+    /** average(): return an average of all values in the list */
+
+    average() {
+
+    }
 }
 
 module.exports = LinkedList;
