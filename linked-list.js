@@ -54,12 +54,6 @@ class LinkedList {
     }
 
     /** pop(): return & remove last item. */
-    // We need to consider:
-    //  what if there is only one item? 
-    //  What if there is a second to last item?
-
-    //  What if the linkedlist is empty?
-
 
     pop() {
         if (this.length < 1) throw new Error("List is empty");
@@ -105,7 +99,7 @@ class LinkedList {
 
         const count = 0;
         let result = this.head;
-        for(let i = 0; i < idx; i ++) {
+        for (let i = 0; i < idx; i++) {
             result = result.next;
         }
 
@@ -115,12 +109,47 @@ class LinkedList {
     /** setAt(idx, val): set val at idx to val */
 
     setAt(idx, val) {
+        if (idx < 0 || idx >= this.length) throw new Error("Invalid index.");
+
+        let result = this.head;
+        for (let i = 0; i < idx; i++) {
+            result = result.next;
+        }
+        result.val = val;
 
     }
 
     /** insertAt(idx, val): add node w/val before idx. */
 
     insertAt(idx, val) {
+        if (idx < 0 || idx > this.length) throw new Error("Invalid index.");
+
+        let newNode = new Node(val);
+
+        if (this.length === 0) {
+            this.head = newNode;
+            this.tail = newNode;
+        }
+
+        if (idx === this.length) {
+            this.tail.next = newNode;
+            this.tail = newNode;
+        } 
+
+        let previous = this.head;
+        let nextNode = this.head.next;
+
+        for (let i = 1; i < idx; i++) {
+            console.log("PREVIOUS NODE ******************", previous);
+            console.log("nextNode ******************", nextNode);
+            previous = nextNode;
+            nextNode = nextNode.next;
+        }
+
+        previous.next = newNode;
+        newNode.next = nextNode;
+
+        this.length ++;
 
     }
 
