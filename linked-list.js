@@ -84,13 +84,32 @@ class LinkedList {
     /** shift(): return & remove first item. */
 
     shift() {
+        if (this.length < 1) throw new Error("List is empty");
 
+        const firstItem = this.head;
+        if (this.length === 1) {
+            this.head = null;
+            this.tail = null;
+        } else {
+            this.head = this.head.next;
+        }
+
+        this.length--;
+        return firstItem.val;
     }
 
     /** getAt(idx): get val at idx. */
 
     getAt(idx) {
+        if (idx < 0 || idx >= this.length) throw new Error("Invalid index.");
 
+        const count = 0;
+        let result = this.head;
+        for(let i = 0; i < idx; i ++) {
+            result = result.next;
+        }
+
+        return result.val;
     }
 
     /** setAt(idx, val): set val at idx to val */
