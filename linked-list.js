@@ -1,3 +1,4 @@
+"use strict";
 /** Node: node for a singly linked list. */
 
 class Node {
@@ -23,7 +24,16 @@ class LinkedList {
   /** push(val): add new value to end of list. */
 
   push(val) {
+    let newNode = new Node(val);
 
+    if(this.head === null) this.head = newNode;
+    if(this.tail === null) {   
+            this.tail = newNode;
+        } else {
+            this.tail.next = newNode;
+            this.tail = newNode;
+        }
+    this.length++;
   }
 
   /** unshift(val): add new value to start of list. */
