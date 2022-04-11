@@ -140,8 +140,6 @@ class LinkedList {
         let nextNode = this.head.next;
 
         for (let i = 1; i < idx; i++) {
-            console.log("PREVIOUS NODE ******************", previous);
-            console.log("nextNode ******************", nextNode);
             previous = nextNode;
             nextNode = nextNode.next;
         }
@@ -156,7 +154,30 @@ class LinkedList {
     /** removeAt(idx): return & remove item at idx, */
 
     removeAt(idx) {
+        if (idx < 0 || idx >= this.length) throw new Error("Invalid index.");
 
+        let removedNode = new Node();
+        if (this.length === 1) {
+            removedNode = this.head;
+            this.head = null;
+            this.tail = null;
+        } else if (idx === this.length - 1) {
+            removedNode.val = this.pop();
+        } else if (idx === 0) {
+            removedNode.val = this.shift();
+        } else {
+            let currentNode = this.head;
+            let nextNode = this.head.next;
+            for (let i = 1; i < idx; i++) {
+                currentNode = nextNode;
+                nextNode = nextNode.next;
+            }
+            currentNode.next = nextNode.next;
+            removedNode = nextNode;
+        }
+
+        this.length --;
+        return removedNode.val;
     }
 
     /** average(): return an average of all values in the list */
