@@ -134,7 +134,7 @@ class LinkedList {
         if (idx === this.length) {
             this.tail.next = newNode;
             this.tail = newNode;
-        } 
+        }
 
         let previous = this.head;
         let nextNode = this.head.next;
@@ -147,7 +147,7 @@ class LinkedList {
         previous.next = newNode;
         newNode.next = nextNode;
 
-        this.length ++;
+        this.length++;
 
     }
 
@@ -176,14 +176,25 @@ class LinkedList {
             removedNode = nextNode;
         }
 
-        this.length --;
+        this.length--;
         return removedNode.val;
     }
 
     /** average(): return an average of all values in the list */
 
     average() {
+        if (this.length === 0) return 0;
 
+        let sum = 0;
+        let nodeCount = 1;
+        let current = this.head;
+        while (current.next !== null) {
+            sum += current.val;
+            nodeCount++;
+            current = current.next;
+        }
+        sum += this.tail.val;
+        return (sum / nodeCount);
     }
 }
 
